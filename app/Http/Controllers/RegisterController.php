@@ -29,7 +29,13 @@ class RegisterController extends Controller{
             'password' => Hash::make($request->password) /* Para encriptar la contraseña Hash::check() */
         ]);
 
-        dd("juaz");
+        /* auth()->attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ]); */
+        auth()->attempt($request->only('email', 'password'));
+
+        return redirect()->route('post.index');
     }
 
 }

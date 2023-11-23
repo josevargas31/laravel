@@ -6,6 +6,8 @@
         @vite('resources/css/app.css')
         <title>Laravel</title>
 
+       
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -15,10 +17,31 @@
         <header class="flex items-center justify-between border-b p-5  bg-white shadow">
              <h1 class="text-3xl font-bold">Jose¡!</h1> 
 
-        <nav class="text-end text-justify-end uppercase"> 
-            <a href="" class="text-gray-600">Login</a>
-            <a href="/register" class="text-gray-600">Crear cuenta</a>
-        </nav>
+             @auth()
+
+             <nav class="flex gap-2 items-center">
+                 <a  class="font-bold uppercase text-gray-600" href="#">Oha <span class="font-bold">{{ auth()->user()->username }}</span></a>
+
+                 <form action="{{route('logout')}}" method="POST">
+                    @csrf
+                    <button class="font-old uppercase text-gray-600">Cerrar sesión</button>
+
+                 </form>
+     
+                 {{-- <a href="{{route('logout')}}" class="font-bold uppercase text-gray-600">Cerrar sessión</a> --}}
+             </nav>
+                 
+             @endauth
+     
+             @guest()
+     
+             <nav class="flex gap-2 items-center">
+                 <a href="{{route('login.index')}}" class="font-bold uppercase text-gray-600">Login</a>
+                 <a href="{{route('register.index')}}" class="font-bold uppercase text-gray-600">Crear cuenta</a>
+             </nav>
+                 
+             @endguest
+
 
         </header>
 
